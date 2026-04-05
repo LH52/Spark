@@ -1,4 +1,5 @@
 import { Tabs } from 'expo-router';
+import {Image} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabLayout() {
@@ -19,8 +20,12 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="heart-outline" size={size + 6} color={color} />
+          tabBarIcon: () => (
+            <Image
+              source={require('../../assets/images/AudioTab.png')}
+              style={{ width: 28, height: 28 }}
+              resizeMode="contain"
+            />
           ),
         }}
       />
