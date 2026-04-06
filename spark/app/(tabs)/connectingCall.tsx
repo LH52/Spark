@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   Text,
@@ -7,9 +7,29 @@ import {
   Image,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
 
-export default function HomeScreen() {
+export default function ConnectingCall() {
+  
   const router = useRouter();
+
+    
+    useFocusEffect(
+      useCallback(() => {
+        const timer = setTimeout(() => {
+        
+          router.replace('/onCall');
+        
+      }, 5000);
+
+        return () => {
+          // Logic when LEAVING the screen (blur or unmount)
+          clearTimeout(timer);
+        };
+      }, [])
+    );
+
+    
 
   return (
     <View style={styles.container}>
@@ -22,22 +42,26 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.title}>Ready to talk ?</Text>
+        <Text style={styles.title}>Finding your next conversation...</Text>
         <Text style={styles.subtitle}>Just be yourself.</Text>
 
-        <Pressable style={styles.button} onPress={() => router.push('/connectingCall')}>
-          <Text style={styles.buttonText}>Start search</Text>
+        <Pressable style={styles.button} onPress={() => router.back()}>
+          <Text style={styles.buttonText}>Cancel search</Text> 
         </Pressable>
 
         <Image
-          source={require('../../assets/images/test.png')}
+          source={require('../../assets/images/phoneBG.png')}
           style={styles.illustration}
           resizeMode="contain"
         />
-
-        <Text style={styles.bottomText}>
-          Connect with someone{'\n'}
-          for a <Text style={styles.boldBlue}>5 Minute</Text> blind call
+        <Text style={styles.bottomText}><Text style={styles.boldBlue}>
+          Be ready !</Text>
+        </Text>
+        <Text style={{ fontSize: 17 }}>
+          Calls last up to 5 minutes.
+        </Text>
+        <Text>
+          <Text style={styles.boldBlue}>+</Text> Tip: Try to give a good first impression.
         </Text>
       </View>
     </View>
@@ -101,6 +125,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: '#4f7fcf',
     fontWeight: '400',
+    paddingBottom: 4,
   },
   boldBlue: {
     fontWeight: '700',

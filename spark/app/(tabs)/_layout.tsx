@@ -10,9 +10,12 @@ export default function TabLayout() {
         tabBarActiveTintColor: '#111',
         tabBarInactiveTintColor: '#111',
         tabBarStyle: {
-          height: 80,
-          paddingTop: 8,
+          height: 70,
+          paddingTop: 14,
           paddingBottom: 8,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+          backgroundColor: '#d5e2e8',
         },
         tabBarShowLabel: false,
       }}
@@ -20,6 +23,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          headerShown: false,
           tabBarIcon: () => (
             <Image
               source={require('../../assets/images/AudioTab.png')}
@@ -41,10 +45,25 @@ export default function TabLayout() {
         name="profile"
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-circle-outline" size={size + 6} color={color} />
+            <Ionicons name="person-outline" size={size + 6} color={color} />
           ),
         }}
       />
+      <Tabs.Screen
+        name="connectingCall"
+        options={{
+          href: null,
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="onCall"
+        options={{
+          href: null,
+          headerShown: false,
+        }}
+      />
     </Tabs>
+    
   );
 }
