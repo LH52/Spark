@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useRouter } from 'expo-router';
 
 const matches = [
   { id: 1, name: 'Anna' },
@@ -67,6 +68,7 @@ function ImagePlaceholder({ size = 64 }) {
 }
 
 export default function ExploreScreen() {
+  const router = useRouter();
   return (
     <View style={styles.container}>
         {/* ✅ HEADER KEPT EXACTLY LIKE YOUR ORIGINAL */}
@@ -90,7 +92,7 @@ export default function ExploreScreen() {
             contentContainerStyle={styles.matchesRow}
           >
             {matches.map((item) => (
-              <Pressable key={item.id} style={styles.matchCard}>
+              <Pressable key={item.id} style={styles.matchCard} onPress={() => router.push({ pathname: 'chat', params: { matchId: item.id, matchName: item.name, isNewChat: 'true' } })}>
                 <View style={styles.matchAvatarWrap}>
                   <ImagePlaceholder size={68} />
                   <View style={styles.sparkBadge}>
@@ -109,7 +111,7 @@ export default function ExploreScreen() {
 
           <View style={styles.conversationList}>
             {conversations.map((item, index) => (
-              <Pressable key={item.id} style={styles.conversationItem}>
+              <Pressable key={item.id} style={styles.conversationItem} onPress={() => router.push({ pathname: 'chat', params: { conversationId: item.id, conversationName: item.name } })}>
                 <View style={styles.conversationAvatarWrap}>
                   <ImagePlaceholder size={58} />
                   {index === 0 && (
