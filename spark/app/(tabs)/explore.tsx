@@ -10,6 +10,8 @@ import {
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useRouter } from 'expo-router';
 
+const usersData = require('../../data/users.json');
+
 const matches = [
   { id: 1, name: 'Anna' },
   { id: 2, name: 'Maella' },
@@ -17,38 +19,23 @@ const matches = [
   { id: 4, name: 'Angel' },
 ];
 
-const conversations = [
-  {
-    id: 1,
-    name: 'Elena, 26',
-    message: 'I really loved that place you mentioned...',
-    time: '2m ago',
-  },
-  {
-    id: 2,
-    name: 'Julian, 29',
-    message: 'How was your weekend at the coast ?',
-    time: '14m ago',
-  },
-  {
-    id: 3,
-    name: 'Maya, 24',
-    message: 'That sounds like a plan.\nSee you Friday!',
-    time: '2h ago',
-  },
-  {
-    id: 4,
-    name: 'Marcus, 31',
-    message: 'Thanks for the recommendation !',
-    time: '6h ago',
-  },
-  {
-    id: 5,
-    name: 'Sophie, 28',
-    message: "Haha, that's so true. Anyway...",
-    time: 'Yesterday',
-  },
-];
+// Message previews for conversations
+const conversationPreviews = {
+  1: { message: 'I really loved that place you mentioned...', time: '2m ago' },
+  2: { message: 'How was your weekend at the coast ?', time: '14m ago' },
+  3: { message: 'That sounds like a plan.\nSee you Friday!', time: '2h ago' },
+  4: { message: 'Thanks for the recommendation !', time: '6h ago' },
+  5: { message: "Haha, that's so true. Anyway...", time: 'Yesterday' },
+};
+
+// Build conversations from user data
+const conversations = usersData.map((user: any) => ({
+  id: user.id,
+  userId: user.id,
+  name: `${user.name}, ${user.age}`,
+  message: conversationPreviews[user.id as keyof typeof conversationPreviews]?.message || '',
+  time: conversationPreviews[user.id as keyof typeof conversationPreviews]?.time || '',
+}));
 
 function ImagePlaceholder({ size = 64 }) {
   return (
@@ -92,7 +79,7 @@ export default function ExploreScreen() {
             contentContainerStyle={styles.matchesRow}
           >
             {matches.map((item) => (
-              <Pressable key={item.id} style={styles.matchCard} onPress={() => router.push({ pathname: 'chat', params: { matchId: item.id, matchName: item.name, isNewChat: 'true' } })}>
+              <Pressable key={item.id} style={styles.matchCard} onPress={() => router.push({ pathname: '/(tabs)/chat', params: { matchId: item.id, matchName: item.name, isNewChat: 'true' } })}>
                 <View style={styles.matchAvatarWrap}>
                   <ImagePlaceholder size={68} />
                   <View style={styles.sparkBadge}>
@@ -110,8 +97,8 @@ export default function ExploreScreen() {
           </Text>
 
           <View style={styles.conversationList}>
-            {conversations.map((item, index) => (
-              <Pressable key={item.id} style={styles.conversationItem} onPress={() => router.push({ pathname: 'chat', params: { conversationId: item.id, conversationName: item.name } })}>
+            {conversations.map((item: any, index: number) => (
+              <Pressable key={item.id} style={styles.conversationItem} onPress={() => router.push({ pathname: '/(tabs)/chat', params: { conversationId: item.id, conversationName: item.name, userId: item.userId } })}>
                 <View style={styles.conversationAvatarWrap}>
                   <ImagePlaceholder size={58} />
                   {index === 0 && (

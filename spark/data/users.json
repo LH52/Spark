@@ -1,0 +1,109 @@
+[
+    {
+        "id": 1,
+        "name": "Elena",
+        "age": 26,
+        "location": "Montreal, QC",
+        "school": "McGill University",
+        "occupation": "Graphic Designer",
+        "height": "165 cm",
+        "bio": "Adventure seeker with a passion for travel. Love exploring new places and trying local cuisines. Passionate about art and design.",
+        "interests": [
+            "Travel",
+            "Art",
+            "Coffee",
+            "Hiking",
+            "Photography",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/elena.png"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Julian",
+        "age": 29,
+        "location": "Vancouver, BC",
+        "school": "University of British Columbia",
+        "occupation": "Software Engineer",
+        "height": "180 cm",
+        "bio": "Tech enthusiast who loves weekend getaways and trying new restaurants. Enjoy outdoor activities and good conversations.",
+        "interests": [
+            "Coding",
+            "Gaming",
+            "Cooking",
+            "Travel",
+            "Music",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/usersImages/julian1.png",
+            "../../assets/images/usersImages/julian2.png",
+            "../../assets/images/usersImages/julian3.png"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Maya",
+        "age": 24,
+        "location": "Toronto, ON",
+        "school": "University of Toronto",
+        "occupation": "Marketing Specialist",
+        "height": "168 cm",
+        "bio": "Lover of jazz, weekend hiking, and profound conversations. Looking for someone who values emotional intelligence and quiet mornings.",
+        "interests": [
+            "Jazz",
+            "Hiking",
+            "Reading",
+            "Art",
+            "Cooking",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/usersImages/maya1.png"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Marcus",
+        "age": 31,
+        "location": "Calgary, AB",
+        "school": "University of Calgary",
+        "occupation": "Business Analyst",
+        "height": "182 cm",
+        "bio": "Enjoys fine dining, fitness, and meaningful conversations. Looking forward to meeting someone adventurous and genuine.",
+        "interests": [
+            "Fitness",
+            "Dining",
+            "Business",
+            "Travel",
+            "Sports",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/usersImages/marcus1.png"
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Sophie",
+        "age": 28,
+        "location": "Ottawa, ON",
+        "school": "Carleton University",
+        "occupation": "Content Creator",
+        "height": "170 cm",
+        "bio": "Creative soul who loves movies, music, and exploring new cafes. Always up for spontaneous adventures and genuine connections.",
+        "interests": [
+            "Movies",
+            "Music",
+            "Fashion",
+            "Cafe Hopping",
+            "Travel",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/usersImages/sophie1.png"
+        ]
+    }
+]

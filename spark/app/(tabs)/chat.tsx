@@ -11,6 +11,8 @@ import {
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 
+const usersData = require('../../data/users.json');
+
 const messageHistory = {
   1: [
     { id: 1, sender: 'Elena', text: 'I really loved that place you mentioned...', time: '10:15 AM', isMe: false },
@@ -62,29 +64,48 @@ export default function OpenChat() {
   const isNewChat = params?.isNewChat === 'true';
   const conversationId = parseInt(params?.conversationId as string) || null;
   const conversationName = (params?.conversationName as string) || 'Chat';
-  const messages = isNewChat ? [] : (conversationId ? messageHistory[conversationId] || [] : []);
+  const userId = parseInt(params?.userId as string) || null;
+  
+  // Get user data from JSON
+  const user = userId ? usersData.find((u: any) => u.id === userId) : null;
+  
+  const messages = isNewChat ? [] : (conversationId && conversationId in messageHistory ? messageHistory[conversationId as keyof typeof messageHistory] || [] : []);
+
+  const handleHeaderPress = () => {
+    if (user) {
+      router.push({
+        pathname: '/(tabs)/viewProfile',
+        params: { 
+          userId: user.id,
+          userData: JSON.stringify(user)
+        }
+      });
+    }
+  };
 
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={styles.header}>
-        <Pressable onPress={() => router.push('explore')} style={styles.backButton}>
-          <Ionicons name="chevron-back" size={28} color="#3d4f69" />
-        </Pressable>
-        <View style={styles.headerAvatar}>
-          <Image
-            source={require('../../assets/images/test.png')}
-            style={styles.avatarImage}
-            resizeMode="cover"
-          />
+      <Pressable onPress={handleHeaderPress}>
+        <View style={styles.header}>
+          <Pressable onPress={() => router.push('/(tabs)/explore')} style={styles.backButton}>
+            <Ionicons name="chevron-back" size={28} color="#3d4f69" />
+          </Pressable>
+          <View style={styles.headerAvatar}>
+            <Image
+              source={require('../../assets/images/test.png')}
+              style={styles.avatarImage}
+              resizeMode="cover"
+            />
+          </View>
+          <View style={styles.headerContent}>
+            <Text style={styles.headerTitle}>{conversationName}</Text>
+          </View>
+          <Pressable style={styles.menuButton}>
+            <Ionicons name="ellipsis-vertical" size={24} color="#3d4f69" />
+          </Pressable>
         </View>
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>{conversationName}</Text>
-        </View>
-        <Pressable style={styles.menuButton}>
-          <Ionicons name="ellipsis-vertical" size={24} color="#3d4f69" />
-        </Pressable>
-      </View>
+      </Pressable>
 
       {/* Messages */}
       <ScrollView style={styles.messagesContainer} contentContainerStyle={styles.messagesList}>
@@ -94,7 +115,7 @@ export default function OpenChat() {
             <Text style={styles.emptyStateText}>Start the conversation!</Text>
           </View>
         ) : (
-          messages.map((message) => (
+          messages.map((message: any) => (
             <View key={message.id} style={[styles.messageContainer, message.isMe ? styles.myMessageContainer : styles.theirMessageContainer]}>
               <View style={[styles.messageBubble, message.isMe ? styles.myMessage : styles.theirMessage]}>
                 <Text style={[styles.messageText, message.isMe ? styles.myMessageText : styles.theirMessageText]}>
