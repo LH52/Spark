@@ -13,6 +13,15 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 
 const usersData = require('../../data/users.json');
 
+// Image mapping for users
+const userImages: { [key: number]: any } = {
+  1: require('../../assets/images/usersImages/elena1.png'),
+  2: require('../../assets/images/usersImages/julian1.png'),
+  3: require('../../assets/images/usersImages/maya1.png'),
+  4: require('../../assets/images/usersImages/marcus1.png'),
+  5: require('../../assets/images/usersImages/sophie1.png'),
+};
+
 const messageHistory = {
   1: [
     { id: 1, sender: 'Elena', text: 'I really loved that place you mentioned...', time: '10:15 AM', isMe: false },
@@ -92,11 +101,17 @@ export default function OpenChat() {
             <Ionicons name="chevron-back" size={28} color="#3d4f69" />
           </Pressable>
           <View style={styles.headerAvatar}>
-            <Image
-              source={require('../../assets/images/test.png')}
-              style={styles.avatarImage}
-              resizeMode="cover"
-            />
+            {user && userImages[user.id] ? (
+              <Image
+                source={userImages[user.id]}
+                style={styles.avatarImage}
+                resizeMode="cover"
+              />
+            ) : (
+              <View style={[styles.avatarImage, { backgroundColor: '#e7ebf0', justifyContent: 'center', alignItems: 'center' }]}>
+                <Ionicons name="image-outline" size={20} color="#9aa4b2" />
+              </View>
+            )}
           </View>
           <View style={styles.headerContent}>
             <Text style={styles.headerTitle}>{conversationName}</Text>
@@ -169,9 +184,9 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   headerAvatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 58,
+    height: 58,
+    borderRadius: 28,
     overflow: 'hidden',
     marginRight: 8,
   },
