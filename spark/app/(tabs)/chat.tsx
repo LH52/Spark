@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f3f4',
   },
   header: {
-    height: 70,
+    height: 90,
     backgroundColor: '#d5e2e8',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
@@ -184,9 +184,9 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   headerAvatar: {
-    width: 58,
-    height: 58,
-    borderRadius: 28,
+    width: 72,
+    height: 72,
+    borderRadius: 34,
     overflow: 'hidden',
     marginRight: 8,
   },
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerTitle: {
-    fontSize: 22,
+    fontSize: 30,
     fontWeight: '700',
     color: '#3d4f69',
   },
