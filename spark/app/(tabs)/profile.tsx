@@ -78,7 +78,7 @@ export default function TabLayout() {
         <View style={styles.photosRow}>
           <View style={styles.photoCard}>
             <Image
-              source={require('../../assets/images/test.png')}
+              source={require('../../assets/images/usersImages/user.png')}
               style={styles.photo}
               resizeMode="cover"
             />
@@ -213,8 +213,8 @@ const styles = StyleSheet.create({
   },
 
   photoCard: {
-    width: 88,
-    height: 88,
+    width: 120,
+    height: 120,
     position: 'relative',
   },
 
@@ -230,8 +230,8 @@ const styles = StyleSheet.create({
   },
 
   addPhotoCard: {
-    width: 88,
-    height: 88,
+    width: 120,
+    height: 120,
     borderWidth: 1.5,
     borderStyle: 'dashed',
     borderColor: '#4f6da0',

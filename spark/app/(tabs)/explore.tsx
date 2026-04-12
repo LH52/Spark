@@ -12,11 +12,24 @@ import { useRouter } from 'expo-router';
 
 const usersData = require('../../data/users.json');
 
+// Image mapping for users
+const userImages: { [key: number]: any } = {
+  1: require('../../assets/images/usersImages/elena1.png'),
+  2: require('../../assets/images/usersImages/julian1.png'),
+  3: require('../../assets/images/usersImages/maya1.png'),
+  4: require('../../assets/images/usersImages/marcus1.png'),
+  5: require('../../assets/images/usersImages/sophie1.png'),
+  6: require('../../assets/images/usersImages/anna1.png'),
+  7: require('../../assets/images/usersImages/maella1.png'),
+  8: require('../../assets/images/usersImages/tam1.png'),
+  9: require('../../assets/images/usersImages/angel1.png'),
+};
+
 const matches = [
-  { id: 1, name: 'Anna' },
-  { id: 2, name: 'Maella' },
-  { id: 3, name: 'Tam' },
-  { id: 4, name: 'Angel' },
+  { id: 6, name: 'Anna' },
+  { id: 7, name: 'Maella' },
+  { id: 8, name: 'Tam' },
+  { id: 9, name: 'Angel' },
 ];
 
 // Message previews for conversations
@@ -28,14 +41,17 @@ const conversationPreviews = {
   5: { message: "Haha, that's so true. Anyway...", time: 'Yesterday' },
 };
 
-// Build conversations from user data
-const conversations = usersData.map((user: any) => ({
-  id: user.id,
-  userId: user.id,
-  name: `${user.name}, ${user.age}`,
-  message: conversationPreviews[user.id as keyof typeof conversationPreviews]?.message || '',
-  time: conversationPreviews[user.id as keyof typeof conversationPreviews]?.time || '',
-}));
+// Build conversations from user data (exclude users in matches)
+const matchUserIds = matches.map(m => m.id);
+const conversations = usersData
+  .filter((user: any) => !matchUserIds.includes(user.id))
+  .map((user: any) => ({
+    id: user.id,
+    userId: user.id,
+    name: `${user.name}, ${user.age}`,
+    message: conversationPreviews[user.id as keyof typeof conversationPreviews]?.message || '',
+    time: conversationPreviews[user.id as keyof typeof conversationPreviews]?.time || '',
+  }));
 
 function ImagePlaceholder({ size = 64 }) {
   return (
@@ -52,6 +68,26 @@ function ImagePlaceholder({ size = 64 }) {
       <Ionicons name="image-outline" size={size * 0.38} color="#9aa4b2" />
     </View>
   );
+}
+
+function UserImage({ size = 64, userId }) {
+  if (userImages[userId]) {
+    return (
+      <Image
+        source={userImages[userId]}
+        style={[
+          styles.userImage,
+          {
+            width: size,
+            height: size,
+            borderRadius: size / 2,
+          },
+        ]}
+      />
+    );
+  }
+
+  return <ImagePlaceholder size={size} />;
 }
 
 export default function ExploreScreen() {
@@ -78,18 +114,23 @@ export default function ExploreScreen() {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.matchesRow}
           >
-            {matches.map((item) => (
-              <Pressable key={item.id} style={styles.matchCard} onPress={() => router.push({ pathname: '/(tabs)/chat', params: { matchId: item.id, matchName: item.name, isNewChat: 'true' } })}>
-                <View style={styles.matchAvatarWrap}>
-                  <ImagePlaceholder size={68} />
-                  <View style={styles.sparkBadge}>
-                    <Ionicons name="sparkles" size={10} color="#5b7cff" />
+            {matches.map((item) => {
+              const user = usersData.find((u: any) => u.id === item.id);
+              const displayName = user ? `${user.name}, ${user.age}` : item.name;
+              
+              return (
+                <Pressable key={item.id} style={styles.matchCard} onPress={() => router.push({ pathname: '/(tabs)/chat', params: { conversationId: item.id, conversationName: displayName, userId: item.id } })}>
+                  <View style={styles.matchAvatarWrap}>
+                    <UserImage size={85} userId={item.id} />
+                    <View style={styles.sparkBadge}>
+                      <Ionicons name="sparkles" size={14} color="#5b7cff" />
+                    </View>
                   </View>
-                </View>
 
-                <Text style={styles.matchName}>{item.name}</Text>
-              </Pressable>
-            ))}
+                  <Text style={styles.matchName}>{item.name}</Text>
+                </Pressable>
+              );
+            })}
           </ScrollView>
 
           <Text style={[styles.sectionTitle, styles.conversationsTitle]}>
@@ -100,7 +141,7 @@ export default function ExploreScreen() {
             {conversations.map((item: any, index: number) => (
               <Pressable key={item.id} style={styles.conversationItem} onPress={() => router.push({ pathname: '/(tabs)/chat', params: { conversationId: item.id, conversationName: item.name, userId: item.userId } })}>
                 <View style={styles.conversationAvatarWrap}>
-                  <ImagePlaceholder size={58} />
+                  <UserImage size={58} userId={item.userId} />
                   {index === 0 && (
                     <View style={styles.sparkBadgeSmall}>
                       <Ionicons name="sparkles" size={9} color="#5b7cff" />
@@ -164,7 +205,7 @@ const styles = StyleSheet.create({
   },
 
   matchCard: {
-    width: 72,
+    width: 95,
     alignItems: 'center',
   },
 
@@ -174,7 +215,7 @@ const styles = StyleSheet.create({
   },
 
   matchName: {
-    fontSize: 12,
+    fontSize: 15,
     color: '#55657c',
   },
 
@@ -239,5 +280,11 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#9aa4b2',
     paddingTop: 2,
+  },
+
+  userImage: {
+    backgroundColor: '#e7ebf0',
+    borderWidth: 1,
+    borderColor: '#d4dbe3',
   },
 });

@@ -105,5 +105,89 @@
         "pictures": [
             "../../assets/images/usersImages/sophie1.png"
         ]
+    },
+    {
+        "id": 6,
+        "name": "Anna",
+        "age": 24,
+        "location": "Montreal, QC",
+        "school": "McGill University",
+        "occupation": "Graphic Designer",
+        "height": "170 cm",
+        "bio": "Outdoor enthusiast and foodie who geeks out over tech and good books. Here for real conversations and maybe a hiking buddy.",
+        "interests": [
+            "Hiking",
+            "Food",
+            "Reading",
+            "Tech",
+            "Photography",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/usersImages/anna1.png"
+        ]
+    },
+    {
+        "id": 7,
+        "name": "Maella",
+        "age": 25,
+        "location": "Montreal, QC",
+        "school": "Concordia University",
+        "occupation": "UX Designer",
+        "height": "166 cm",
+        "bio": "Passionate about design, yoga, and finding the best ramen spots in the city. I believe good vibes and creativity go hand in hand.",
+        "interests": [
+            "Design",
+            "Yoga",
+            "Ramen",
+            "Music",
+            "Plants",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/usersImages/maella1.png"
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Tam",
+        "age": 27,
+        "location": "Toronto, ON",
+        "school": "Ryerson University",
+        "occupation": "Photographer",
+        "height": "172 cm",
+        "bio": "I tell stories through a lens and find beauty in everyday moments. Coffee dependent, film buff, and always planning the next road trip.",
+        "interests": [
+            "Photography",
+            "Film",
+            "Coffee",
+            "Road Trips",
+            "Vintage",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/usersImages/tam1.png"
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Angel",
+        "age": 26,
+        "location": "Vancouver, BC",
+        "school": "Simon Fraser University",
+        "occupation": "Fitness Coach",
+        "height": "175 cm",
+        "bio": "Gym rat by day, home chef by night. I love pushing limits and sharing good food with good people. Looking for someone who matches my energy.",
+        "interests": [
+            "Fitness",
+            "Cooking",
+            "Nutrition",
+            "Hiking",
+            "Basketball",
+            "+"
+        ],
+        "pictures": [
+            "../../assets/images/usersImages/angel1.png"
+        ]
     }
 ]

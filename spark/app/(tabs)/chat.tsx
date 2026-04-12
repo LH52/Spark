@@ -20,6 +20,10 @@ const userImages: { [key: number]: any } = {
   3: require('../../assets/images/usersImages/maya1.png'),
   4: require('../../assets/images/usersImages/marcus1.png'),
   5: require('../../assets/images/usersImages/sophie1.png'),
+  6: require('../../assets/images/usersImages/anna1.png'),
+  7: require('../../assets/images/usersImages/maella1.png'),
+  8: require('../../assets/images/usersImages/tam1.png'),
+  9: require('../../assets/images/usersImages/angel1.png'),
 };
 
 const messageHistory = {
@@ -63,6 +67,10 @@ const messageHistory = {
     { id: 5, sender: 'Sophie', text: 'Ooh I\'ve heard good things! We should go see it together', time: '10:45 AM', isMe: false },
     { id: 6, sender: 'You', text: 'For sure! This weekend?', time: '2:30 PM', isMe: true },
   ],
+  6: [],
+  7: [],
+  8: [],
+  9: [],
 };
 
 export default function OpenChat() {

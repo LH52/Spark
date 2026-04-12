@@ -15,6 +15,10 @@ const imageMap: { [key: string]: any } = {
   '../../assets/images/usersImages/marcus1.png': require('../../assets/images/usersImages/marcus1.png'),
   '../../assets/images/usersImages/maya1.png': require('../../assets/images/usersImages/maya1.png'),
   '../../assets/images/usersImages/sophie1.png': require('../../assets/images/usersImages/sophie1.png'),
+  '../../assets/images/usersImages/anna1.png': require('../../assets/images/usersImages/anna1.png'),
+  '../../assets/images/usersImages/maella1.png': require('../../assets/images/usersImages/maella1.png'),
+  '../../assets/images/usersImages/tam1.png': require('../../assets/images/usersImages/tam1.png'),
+  '../../assets/images/usersImages/angel1.png': require('../../assets/images/usersImages/angel1.png'),
   '../../assets/images/test.png': require('../../assets/images/test.png'),
 };
 
