@@ -1,8 +1,17 @@
-import { Tabs } from 'expo-router';
+import { Tabs, usePathname } from 'expo-router';
 import {Image} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabLayout() {
+
+  const pathname = usePathname();
+
+  const audioActive =
+    pathname === '/' ||
+    pathname === '/index' ||
+    pathname === '/connectingCall' ||
+    pathname === '/onCall';
+
   return (
     <Tabs
       screenOptions={{
@@ -27,7 +36,7 @@ export default function TabLayout() {
            tabBarIcon: ({ focused }) => (
             <Image
               source={
-                focused
+                audioActive
                   ? require('../../assets/images/AudioTab.png') // active image
                   : require('../../assets/images/AudioOut.png')       // inactive image
               }
