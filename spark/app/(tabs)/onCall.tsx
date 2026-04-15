@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Pressable,
   Image,
+  
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function OnCall() {
   const router = useRouter();
+
+  const [focused, setFocused] = useState(true);
   
 
   return (
@@ -60,11 +63,71 @@ export default function OnCall() {
 
         </View>
       </View>
+
+      <View style={styles.chatOptions}>
+        <View>
+          <Pressable onPress={() => setFocused(!focused)}>
+            <Ionicons
+              name={focused ? 'mic-outline' : 'mic-off-outline'}
+              size={70}
+              color={focused ? "#467bbc" : 'red'}
+            />
+          </Pressable>
+        </View>
+
+        <View style={styles.declineMatch}>
+          
+          <View>
+            <Pressable onPress={() => router.push('./index')} style={styles.individualChat}>
+            <Image
+              source={require('../../assets/images/declineCall.png')}
+              style={styles.chatImages}
+            />
+            <Text>Decline</Text>
+          </Pressable>
+          </View>
+
+          <View>
+            <Pressable onPress={() => router.push('./index')} style={styles.individualChat}>
+            <Image
+              source={require('../../assets/images/AudioTab.png')}
+              style={styles.chatImages}
+            />
+            <Text>Match</Text>
+          </Pressable>
+          </View>
+          
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  chatOptions: {
+    flex: 1,
+    marginHorizontal:20,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    alignItems: 'center',
+  },
+  declineMatch: {
+    flex: 1,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 30,
+    paddingTop: 30,
+  },
+  chatImages:{
+    height: 80,
+    width: 80,
+  },
+  individualChat: {
+    justifyContent: 'center',   // vertical alignment inside parent
+    alignItems: 'center',
+  },
   container: {
     flex: 1,
     backgroundColor: '#f3f3f0',
