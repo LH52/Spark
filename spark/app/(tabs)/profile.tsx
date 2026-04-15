@@ -105,11 +105,11 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4f3f4',
+    backgroundColor: '#f3f3f0',
   },
 
   header: {
-    height: 86,
+    height: 96,
     backgroundColor: '#d5e2e8',
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
   interestsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center',
     gap: 14,
     marginBottom: 18,
   },

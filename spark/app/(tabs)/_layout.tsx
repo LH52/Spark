@@ -24,9 +24,13 @@ export default function TabLayout() {
         name="index"
         options={{
           headerShown: false,
-          tabBarIcon: () => (
+           tabBarIcon: ({ focused }) => (
             <Image
-              source={require('../../assets/images/AudioTab.png')}
+              source={
+                focused
+                  ? require('../../assets/images/AudioTab.png') // active image
+                  : require('../../assets/images/AudioOut.png')       // inactive image
+              }
               style={{ width: 28, height: 28 }}
               resizeMode="contain"
             />
@@ -36,16 +40,24 @@ export default function TabLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="chatbubble-outline" size={size + 4} color={color} />
+          tabBarIcon: ({ focused, size }) => (
+            <Ionicons
+              name={focused ? 'chatbubble' : 'chatbubble-outline'}
+              size={size + 4}
+              color="#2e4562"
+            />
           ),
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-outline" size={size + 6} color={color} />
+          tabBarIcon: ({ focused, size }) => (
+            <Ionicons
+              name={focused ? 'person' : 'person-outline'}
+              size={size + 6}
+              color="#2e4562"
+            />
           ),
         }}
       />
