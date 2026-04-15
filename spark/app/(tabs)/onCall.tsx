@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,14 +7,42 @@ import {
   Image,
   
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function OnCall() {
   const router = useRouter();
-
+  const [timeLeft, setTimeLeft] = useState(300);
   const [focused, setFocused] = useState(true);
+
+ useFocusEffect(
+    React.useCallback(() => {
+      setTimeLeft(300);
+    }, [])
+  );
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      setTimeLeft(300);
+      router.replace('/');
+      return;
+    }
+
+    const interval = setInterval(() => {
+      setTimeLeft(prev => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [timeLeft]);
+
+const formatTime = (seconds: number) => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+
   
+
+  return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+};
 
   return (
     <View style={styles.container}>
@@ -33,7 +61,9 @@ export default function OnCall() {
             <View style={styles.callHeader}>
                 <Text style={styles.callStatus}>✦ On Call</Text>
                 <View style={styles.timer}>
-                    <Text style={styles.callTime}>3:22</Text>
+                    <Text style={styles.callTime}>
+                      {formatTime(timeLeft)}
+                    </Text>
                     <Ionicons name="hourglass-outline" size={15} color="#334b6c" />
                 </View>
                 
@@ -78,7 +108,7 @@ export default function OnCall() {
         <View style={styles.declineMatch}>
           
           <View>
-            <Pressable onPress={() => router.push('./index')} style={styles.individualChat}>
+            <Pressable onPress={() => {setTimeLeft(300); router.replace('/')}} style={styles.individualChat}>
             <Image
               source={require('../../assets/images/declineCall.png')}
               style={styles.chatImages}
@@ -88,7 +118,7 @@ export default function OnCall() {
           </View>
 
           <View>
-            <Pressable onPress={() => router.push('./index')} style={styles.individualChat}>
+            <Pressable style={styles.individualChat}>
             <Image
               source={require('../../assets/images/AudioTab.png')}
               style={styles.chatImages}
